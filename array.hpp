@@ -1,6 +1,3 @@
-#include "array.h"
-
-
 /**Constructors and Destructor**/
 
 template <class T, std::size_t N>

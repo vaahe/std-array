@@ -2,10 +2,9 @@
 #define ARRAY_H
 
 #include <initializer_list>
-#include <ostream>
+#include <iostream>
 
 #include "iterator.h"
-
 
 
 template <class T, std::size_t N>
@@ -51,6 +50,6 @@ private:
     std::size_t m_size;
 };
 
-//#include "array.hpp"
+#include "array.hpp"
 
 #endif  // ARRAY_H

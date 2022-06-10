@@ -1,10 +1,7 @@
-#include <iostream>
 #include "array.h"
 
-
 int main() {
-    array<int> arr;
-    std::cout<<sum(4,5);
+	Array<int, 3> array;
 
-    return 0;
+	return 0;
 }

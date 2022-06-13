@@ -4,37 +4,95 @@
 #include <initializer_list>
 #include <iostream>
 
-#include "iterator.h"
-
-
 template <class T, std::size_t N>
 class Array {
 public:
+    class RandomAccessIterator {
+    public:
+        typedef T									value_type;
+        typedef T&                                  reference;
+        typedef const T&                            const_reference;
+        typedef T*                                  pointer;
+        typedef const T*                            const_pointer;
+        typedef std::ptrdiff_t						difference_type;
+        typedef std::random_access_iterator_tag		iterator_category;
+
+    public:
+        RandomAccessIterator(value_type*);
+        reference operator[](difference_type);
+        pointer operator->();
+        reference operator*();
+        RandomAccessIterator& operator++();
+        RandomAccessIterator& operator++(int);
+        RandomAccessIterator& operator--();
+        RandomAccessIterator& operator--(int);
+        RandomAccessIterator operator-(difference_type) const;
+        RandomAccessIterator operator+(difference_type) const;
+        RandomAccessIterator& operator+=(difference_type);
+        RandomAccessIterator& operator-=(difference_type);
+        bool operator==(const RandomAccessIterator&) const;
+        bool operator!=(const RandomAccessIterator&) const;
+
+    private:
+        T* m_ptr;
+    };
+
+    class ReverseRandomAccessIterator {
+    public:
+        typedef T									value_type;
+        typedef T&                                  reference;
+        typedef const T&                            const_reference;
+        typedef T*                                  pointer;
+        typedef const T*                            const_pointer;
+        typedef std::ptrdiff_t						difference_type;
+        typedef std::random_access_iterator_tag		iterator_category;
+
+    public:
+        ReverseRandomAccessIterator(value_type*);
+        reference operator[](difference_type);
+        pointer operator->();
+        reference operator*();
+        ReverseRandomAccessIterator& operator++();
+        ReverseRandomAccessIterator& operator++(int);
+        ReverseRandomAccessIterator& operator--();
+        ReverseRandomAccessIterator& operator--(int);
+        ReverseRandomAccessIterator operator-(difference_type) const;
+        ReverseRandomAccessIterator operator+(difference_type) const;
+        ReverseRandomAccessIterator& operator+=(difference_type);
+        ReverseRandomAccessIterator& operator-=(difference_type);
+        bool operator==(const ReverseRandomAccessIterator&) const;
+        bool operator!=(const ReverseRandomAccessIterator&) const;
+
+    private:
+        T* m_ptr;
+    };
+
+public:
     Array();
-    Array(const Array<T, N>&);
-    Array(Array<T, N>&&);
+    Array(const Array<T, N>&);  //copy ctor
+    Array(Array<T, N>&&);  //move ctor
     Array(std::initializer_list<T>&);
     ~Array();
 
 public:
-    Array<T, N>& front();  //access the first element
-    Array<T, N>& back();  //access the last element
-    RandomAccessIterator<T> begin();  //returns an iterator to the beginning
-    RandomAccessIterator<T> end();  //return an iterator to the end
-    bool empty();
-    std::size_t size();
+    Array<T, N>& front() const;  //access the first element
+    Array<T, N>& back() const;  //access the last element
+    RandomAccessIterator begin() const;  //returns an iterator to the beginning
+    RandomAccessIterator end() const;  //return an iterator to the end
+    ReverseRandomAccessIterator rbegin() const;
+    ReverseRandomAccessIterator rend() const;
+    T& at(std::size_t) const;  //returns reference at specified position
+    T* data() const;  //direct access to underlying array
+    bool empty() const;
+    std::size_t size() const;
     void fill(const T&);  //fill the container with specified value
-    T& at(Array<T, N>);  //error-i jamanak std::out_of_range
-    T* data();  //direct access to underlying array
-    ReverseRandomAccessIterator<T> rbegin();
-    ReverseRandomAccessIterator<T> rend();
 
     Array<T, N>& operator=(Array<T, N>&);  //copy operator assignment
     Array<T, N>& operator=(Array<T, N>&&);  //move operator assignment
-    friend std::ostream operator<<(std::ostream& out, Array<T, N>&);
-    T& operator[](int);
     Array<T, N>& operator+(const Array<T, N>&);
     Array<T, N>& operator+=(const Array<T, N>&);
+    friend std::ostream operator<<(std::ostream& out, Array<T, N>&);
+    T& operator[](int);
     bool operator<(const Array<T, N>&);
     bool operator<=(const Array<T, N>&);
     bool operator>(const Array<T, N>&);
@@ -43,7 +101,7 @@ public:
     bool operator!=(const Array<T, N>&);
 
 private:
-    T& sum();
+    T& sum() const;
 
 private:
     T m_data[N];

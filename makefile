@@ -1,7 +1,7 @@
-  all: linked_list.x
+  all: std-array.x
 
-  linked_list.x: linked_list.hpp main.cpp
-				g++ main.cpp -o linked_list.x -std=c++20
+  std-array.x: array.hpp main.cpp
+				g++ main.cpp -o std-array.x -std=c++2a
 
   clean: 
-	  $(RM) linked_list
+	  $(RM) std-array

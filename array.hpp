@@ -4,7 +4,7 @@ template <class T, std::size_t N>
 Array<T, N>::RandomAccessIterator::RandomAccessIterator(value_type* ptr) : m_ptr(ptr) {}
 
 template <class T, std::size_t N>
-typename Array<T,N>::RandomAccessIterator& Array<T, N>::RandomAccessIterator::operator++() {
+typename Array<T, N>::RandomAccessIterator& Array<T, N>::RandomAccessIterator::operator++() {
 	++m_ptr;
 	return *this;
 }
@@ -30,7 +30,7 @@ typename Array<T, N>::RandomAccessIterator& Array<T, N>::RandomAccessIterator::o
 }
 
 template <class T, std::size_t N>
-typename Array<T,N>::RandomAccessIterator::reference Array<T, N>::RandomAccessIterator::operator*() {
+typename Array<T, N>::RandomAccessIterator::reference Array<T, N>::RandomAccessIterator::operator*() {
 	return *m_ptr;
 }
 
@@ -40,28 +40,28 @@ typename Array<T, N>::RandomAccessIterator::pointer Array<T, N>::RandomAccessIte
 }
 
 template <class T, std::size_t N>
-typename Array<T, N>::RandomAccessIterator::reference Array<T,N>::RandomAccessIterator::operator[](difference_type index) {
+typename Array<T, N>::RandomAccessIterator::reference Array<T, N>::RandomAccessIterator::operator[](RandomAccessIterator index) {
 	return *(m_ptr + index);
 }
 
 template <class T, std::size_t N>
-typename Array<T, N>::RandomAccessIterator Array<T, N>::RandomAccessIterator::operator+(difference_type other) const {
+typename Array<T, N>::RandomAccessIterator Array<T, N>::RandomAccessIterator::operator+(RandomAccessIterator other) const {
 	return RandomAccessIterator(m_ptr + other);
 }
 
 template <class T, std::size_t N>
-typename Array<T, N>::RandomAccessIterator Array<T, N>::RandomAccessIterator::operator-(difference_type other) const {
+typename Array<T, N>::RandomAccessIterator Array<T, N>::RandomAccessIterator::operator-(RandomAccessIterator other) const {
 	return RandomAccessIterator(m_ptr - other);
 }
 
 template <class T, std::size_t N>
-typename Array<T, N>::RandomAccessIterator& Array<T, N>::RandomAccessIterator::operator+=(difference_type ptr) {
+typename Array<T, N>::RandomAccessIterator& Array<T, N>::RandomAccessIterator::operator+=(RandomAccessIterator ptr) {
 	m_ptr += ptr;
 	return *this;
 }
 
 template <class T, std::size_t N>
-typename Array<T, N>::RandomAccessIterator& Array<T, N>::RandomAccessIterator::operator-=(difference_type ptr) {
+typename Array<T, N>::RandomAccessIterator& Array<T, N>::RandomAccessIterator::operator-=(RandomAccessIterator ptr) {
 	m_ptr -= ptr;
 	return *this;
 }
@@ -82,7 +82,7 @@ template <class T, std::size_t N>
 Array<T, N>::ReverseRandomAccessIterator::ReverseRandomAccessIterator(value_type* ptr) : m_ptr(ptr) {}
 
 template <class T, std::size_t N>
-typename Array<T, N>::ReverseRandomAccessIterator::reference Array<T, N>::ReverseRandomAccessIterator::operator[](difference_type index) {
+typename Array<T, N>::ReverseRandomAccessIterator::reference Array<T, N>::ReverseRandomAccessIterator::operator[](ReverseRandomAccessIterator index) {
 	return *(m_ptr - index);
 }
 
@@ -123,22 +123,22 @@ typename Array<T, N>::ReverseRandomAccessIterator& Array<T, N>::ReverseRandomAcc
 }
 
 template <class T, std::size_t N>
-typename Array<T, N>::ReverseRandomAccessIterator Array<T, N>::ReverseRandomAccessIterator::operator-(difference_type other) const {
+typename Array<T, N>::ReverseRandomAccessIterator Array<T, N>::ReverseRandomAccessIterator::operator-(ReverseRandomAccessIterator other) const {
 	return m_ptr + other.m_ptr;
 }
 
 template <class T, std::size_t N>
-typename Array<T, N>::ReverseRandomAccessIterator Array<T, N>::ReverseRandomAccessIterator::operator+(difference_type other) const {
+typename Array<T, N>::ReverseRandomAccessIterator Array<T, N>::ReverseRandomAccessIterator::operator+(ReverseRandomAccessIterator other) const {
 	return m_ptr - other.m_ptr;
 }
 
 template <class T, std::size_t N>
-typename Array<T, N>::ReverseRandomAccessIterator& Array<T, N>::ReverseRandomAccessIterator::operator+=(difference_type other) {
+typename Array<T, N>::ReverseRandomAccessIterator& Array<T, N>::ReverseRandomAccessIterator::operator+=(ReverseRandomAccessIterator other) {
 	return m_ptr -= other.m_ptr;
 }
 
 template <class T, std::size_t N>
-typename Array<T, N>::ReverseRandomAccessIterator& Array<T, N>::ReverseRandomAccessIterator::operator-=(difference_type other) {
+typename Array<T, N>::ReverseRandomAccessIterator& Array<T, N>::ReverseRandomAccessIterator::operator-=(ReverseRandomAccessIterator other) {
 	return m_ptr += other.m_ptr;
 }
 
@@ -152,44 +152,47 @@ bool Array<T, N>::ReverseRandomAccessIterator::operator!=(const ReverseRandomAcc
 	return m_ptr != other.m_ptr;
 }
 
-	
+
 /**Constructors and Destructor**/
 
 template <class T, std::size_t N>
 Array<T, N>::Array() {
-	m_size = 0;
+	m_data = new T[N]();
+	m_size = N;
 }
 
 template <class T, std::size_t N>
 Array<T, N>::Array(const Array<T, N>& other_array) : m_size(other_array.m_size) {
+	m_data = new T[N];
 	for (std::size_t i = 0; i < m_size; ++i) {
 		m_data[i] = other_array.m_data[i];
 	}
 }
 
 template <class T, std::size_t N>
-Array<T, N>::Array(std::initializer_list<T>& other_array) {
-	for (auto it = begin(); it != end(); ++it) {
-		std::count << *it << " ";
+Array<T, N>::Array(const std::initializer_list<T>& other_array) {
+	m_data = new T[N];
+	for (auto it = other_array.begin(); it != other_array.end(); ++it) {
+		for (std::size_t i = 0; i < N; i++) {
+			m_data[i] = *it;
+		}
 	}
+	std::cout << std::endl;
+
+	m_size = other_array.size();
 }
 
 template <class T, std::size_t N>
 Array<T, N>::Array(Array<T, N>&& other_array) :
 	m_size(other_array.m_size),
 	m_data(other_array.m_data) {
-	other_array.m_size = 0;
-	for (std::size_t i = 0; i < other_array.m_size; ++i) {
-		other_array.m_data[i] = 0;
-	}
+	other_array.fill(0);
 }
 
-//template <class T, std::size_t N>
-//Array<T, N>::~Array() {
-//	for (auto it = begin(); it != end(); ++it) {
-//		delete it;
-//	}
-//}
+template <class T, std::size_t N>
+Array<T, N>::~Array() {
+	delete[] m_data;
+}
 
 /**Functions**/
 
@@ -261,9 +264,33 @@ typename Array<T, N>::ReverseRandomAccessIterator Array<T, N>::rend() const {
 /**Operators**/
 
 template <class T, std::size_t N>
+Array<T, N>& Array<T, N>::operator=(const Array<T, N>& other_array) {
+	if (this == &other_array) {
+		return *this;
+	}
+
+	if (m_size != 0) {
+		fill(0);
+	}
+
+	if (other_array.m_size == 0) {
+		this = new Array;
+	}
+	else {
+		for (int i = 0; i < N; i++) {
+			m_data[i] = other_array.m_data[i];
+		}
+	}
+}
+
+template <class T, std::size_t N>
 Array<T, N>& Array<T, N>::operator=(Array<T, N>&& other_array) {
 	if (&other_array == this) {
 		return *this;
+	}
+
+	if (m_size != 0) {
+		fill(0);
 	}
 
 	*this = std::move(other_array);
@@ -273,8 +300,8 @@ Array<T, N>& Array<T, N>::operator=(Array<T, N>&& other_array) {
 template <typename T, std::size_t N>
 class Array;
 template <typename T, std::size_t N>
-std::ostream& operator<<(std::ostream& out, Array<T, N>& other) {
-	for (std::size_t i = 0; i < other.m_size; ++i) {
+std::ostream& operator<<(std::ostream& out, const Array<T, N>& other) {
+	for (std::size_t i = 0; i < other.m_size; i++) {
 		out << other.m_data[i] << " ";
 	}
 
@@ -282,14 +309,10 @@ std::ostream& operator<<(std::ostream& out, Array<T, N>& other) {
 }
 
 template <class T, std::size_t N>
-T& Array<T, N>::operator[](int index) {
-	if (m_size == 0) {
-		return 0;
-	}
-	
+T& Array<T, N>::operator[](int index) const {
 	int counter = 0;
 	while (counter != index) {
-		counter++;
+		++counter;
 	}
 	return m_data[index];
 }
@@ -350,7 +373,7 @@ bool Array<T, N>::operator>(const Array<T, N>& other) {
 }
 
 template <class T, std::size_t N>
-bool Array<T, N>::operator >= (const Array<T, N>&other) {
+bool Array<T, N>::operator >= (const Array<T, N>& other) {
 	return sum() >= other.sum();
 }
 
@@ -367,9 +390,9 @@ bool Array<T, N>::operator!=(const Array<T, N>& other) {
 /**Helper Functions**/
 
 template <class T, std::size_t N>
-T& Array<T, N>::sum() const {
+T Array<T, N>::sum() const {
 	if (m_size == 0) {
-		return 0;
+		return T();
 	}
 
 	T result = T();

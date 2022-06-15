@@ -19,17 +19,17 @@ public:
 
     public:
         RandomAccessIterator(value_type*);
-        reference operator[](difference_type);
+        reference operator[](RandomAccessIterator);
         pointer operator->();
         reference operator*();
         RandomAccessIterator& operator++();
         RandomAccessIterator& operator++(int);
         RandomAccessIterator& operator--();
         RandomAccessIterator& operator--(int);
-        RandomAccessIterator operator-(difference_type) const;
-        RandomAccessIterator operator+(difference_type) const;
-        RandomAccessIterator& operator+=(difference_type);
-        RandomAccessIterator& operator-=(difference_type);
+        RandomAccessIterator operator-(RandomAccessIterator) const;
+        RandomAccessIterator operator+(RandomAccessIterator) const;
+        RandomAccessIterator& operator+=(RandomAccessIterator);
+        RandomAccessIterator& operator-=(RandomAccessIterator);
         bool operator==(const RandomAccessIterator&) const;
         bool operator!=(const RandomAccessIterator&) const;
 
@@ -49,17 +49,17 @@ public:
 
     public:
         ReverseRandomAccessIterator(value_type*);
-        reference operator[](difference_type);
+        reference operator[](ReverseRandomAccessIterator);
         pointer operator->();
         reference operator*();
         ReverseRandomAccessIterator& operator++();
         ReverseRandomAccessIterator& operator++(int);
         ReverseRandomAccessIterator& operator--();
         ReverseRandomAccessIterator& operator--(int);
-        ReverseRandomAccessIterator operator-(difference_type) const;
-        ReverseRandomAccessIterator operator+(difference_type) const;
-        ReverseRandomAccessIterator& operator+=(difference_type);
-        ReverseRandomAccessIterator& operator-=(difference_type);
+        ReverseRandomAccessIterator operator-(ReverseRandomAccessIterator) const;
+        ReverseRandomAccessIterator operator+(ReverseRandomAccessIterator) const;
+        ReverseRandomAccessIterator& operator+=(ReverseRandomAccessIterator);
+        ReverseRandomAccessIterator& operator-=(ReverseRandomAccessIterator);
         bool operator==(const ReverseRandomAccessIterator&) const;
         bool operator!=(const ReverseRandomAccessIterator&) const;
 
@@ -71,7 +71,7 @@ public:
     Array();
     Array(const Array<T, N>&);  //copy ctor
     Array(Array<T, N>&&);  //move ctor
-    Array(std::initializer_list<T>&);
+    Array(const std::initializer_list<T>&);
     ~Array();
 
 public:
@@ -87,12 +87,12 @@ public:
     std::size_t size() const;
     void fill(const T&);  //fill the container with specified value
 
-    Array<T, N>& operator=(Array<T, N>&);  //copy operator assignment
+    Array<T, N>& operator=(const Array<T, N>&);  //copy operator assignment
     Array<T, N>& operator=(Array<T, N>&&);  //move operator assignment
     Array<T, N>& operator+(const Array<T, N>&);
     Array<T, N>& operator+=(const Array<T, N>&);
-    friend std::ostream operator<<(std::ostream& out, Array<T, N>&);
-    T& operator[](int);
+    friend std::ostream operator<<(std::ostream& out, const Array<T, N>&);
+    T& operator[](int) const;
     bool operator<(const Array<T, N>&);
     bool operator<=(const Array<T, N>&);
     bool operator>(const Array<T, N>&);
@@ -101,10 +101,10 @@ public:
     bool operator!=(const Array<T, N>&);
 
 private:
-    T& sum() const;
+    T sum() const;
 
 private:
-    T m_data[N];
+	T* m_data;
     std::size_t m_size;
 };
 

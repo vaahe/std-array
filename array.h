@@ -75,8 +75,8 @@ public:
     ~Array();
 
 public:
-    Array<T, N>& front() const;  //access the first element
-    Array<T, N>& back() const;  //access the last element
+    T& front() const;  //access the first element
+    T& back() const;  //access the last element
     RandomAccessIterator begin() const;  //returns an iterator to the beginning
     RandomAccessIterator end() const;  //return an iterator to the end
     ReverseRandomAccessIterator rbegin() const;

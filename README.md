@@ -6,29 +6,29 @@
 <h5>This C++ STL array is a kind of sequential container and is not used extremely in regular programming or in competitive programming but sometimes its member function provides an upper edge to it over the regular normal array that we use in our daily life. So, we are discussing some of the important member function that is used with such kind of array:</h5>
 
 <ul>
-<li>[ ] Operator : This is similar to the normal array, we use it to access the element store at index ‘i’ .</li>
-<li> front( ) and back( ): These methods are used to access the first and the last element of the array directly.</li>
-<li>empty( ): This function is used to check whether the declared STL array is empty or not, if it is empty then it returns true else false.</li>
-<li>at( ): is used to access the element stored at a specific location, if we try to access the element which is out of bounds of the array size then it throws an exception. </li>
-<li> fill( ): is specially used to initialize or fill all the indexes of the array with a similar value.</li>
-<li>size( ): is used to get the maximum number of indexes in the array.</li>
-<li>data( ): returns the pointer to the first element of the array object. Because elements in the array are stored in contiguous memory locations. This data( ) function return us the base address of the string/char type object.</li>
-<li>front( ): returns a reference to the first element in the container.</li>
-<li>back( ): returns a reference to the last element in the container.</li>
-<li>begin( ): returns an iterator to the first element of the array.</li>
-<li>end( ): returns an iterator to the element following the last element of the array.</li>
-<li>rbegin( ): returns a reverse iterator to the first element of the reversed array. It corresponds to the last element of the non-reversed array. If the array is empty, the returned iterator is equal to rend().</li>
-<li>rend( ): returns a reverse iterator to the element following the last element of the reversed array.</li>
-<li>operator<( ): compares the contents of two arrays.</li>
-<li>operator<=( ): compares the contents of two arrays.</li>
-<li>operator>( ): compares the contents of two arrays.</li>
-<li>operator>=( ): compares the contents of two arrays.</li>
-<li>operator==( ): compares the contents of two arrays.</li>
-<li>operator!=( ): compares the contents of two arrays.</li>
-<li>operator=( ): Copy assignment operator - overwrites every element of the array with the corresponding element of another array.</li>
-<li>operator( ): Move assignment operator - typically "steal" the resources held by the argument (e.g. pointers to dynamically-allocated objects, file descriptors, TCP sockets, I/O streams, running threads, etc.), rather than make copies of them, and leave the argument in some valid but otherwise indeterminate state.</li>
-<li>operator<<( ): generates a sequence of characters with the representation of val , properly formatted according to the locale and other formatting settings selected in the stream, and inserts them into the output stream.</li>
-<li>operator+( ), operator+=( ): are used for adding sum of one array to another array. </li>
+<li><b>[ ] Operator</b> : This is similar to the normal array, we use it to access the element store at index ‘i’ .</li>
+<li><b>front( )</b> and <b>back( )</b>: These methods are used to access the first and the last element of the array directly.</li>
+<li><b>empty( )</b>: This function is used to check whether the declared STL array is empty or not, if it is empty then it returns true else false.</li>
+<li><b>at( )</b>: is used to access the element stored at a specific location, if we try to access the element which is out of bounds of the array size then it throws an exception. </li>
+<li><b>fill( )</b>: is specially used to initialize or fill all the indexes of the array with a similar value.</li>
+<li><b>size( )</b>: is used to get the maximum number of indexes in the array.</li>
+<li><b>data( )</b>: returns the pointer to the first element of the array object. Because elements in the array are stored in contiguous memory locations. This data( ) function return us the base address of the string/char type object.</li>
+<li><b>front( )</b>: returns a reference to the first element in the container.</li>
+<li><b>back( )</b>: returns a reference to the last element in the container.</li>
+<li><b>begin( )</b>: returns an iterator to the first element of the array.</li>
+<li><b>end( )</b>: returns an iterator to the element following the last element of the array.</li>
+<li><b>rbegin( )</b>: returns a reverse iterator to the first element of the reversed array. It corresponds to the last element of the non-reversed array. If the array is empty, the returned iterator is equal to rend().</li>
+<li><b>rend( )</b>: returns a reverse iterator to the element following the last element of the reversed array.</li>
+<li><b>operator<( )</b>: compares the contents of two arrays.</li>
+<li><b>operator<=( )</b>: compares the contents of two arrays.</li>
+<li><b>operator>( )</b>: compares the contents of two arrays.</li>
+<li><b>operator>=( )</b>: compares the contents of two arrays.</li>
+<li><b>operator==( )</b>: compares the contents of two arrays.</li>
+<li><b>operator!=( )</b>: compares the contents of two arrays.</li>
+<li><b>operator=( )</b>: Copy assignment operator - overwrites every element of the array with the corresponding element of another array.</li>
+<li><b>operator( )</b>: Move assignment operator - typically "steal" the resources held by the argument (e.g. pointers to dynamically-allocated objects, file descriptors, TCP sockets, I/O streams, running threads, etc.), rather than make copies of them, and leave the argument in some valid but otherwise indeterminate state.</li>
+<li><b>operator<<( )</b>: generates a sequence of characters with the representation of val , properly formatted according to the locale and other formatting settings selected in the stream, and inserts them into the output stream.</li>
+<li><b>operator+( )</b>, <b>operator+=( )</b>: are used for adding sum of one array to another array. </li>
 
 </ul>
 

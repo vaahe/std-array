@@ -1,6 +1,6 @@
 <h1>STD::ARRAY</h1>
 
-<h4>The array is a collection of homogeneous objects and this array container is defined for constant size. This container is an aggregate type with the same semantics as a struct holding a C-style array T[N] as its only non-static data member. Unlike a C-style array, it doesn't decay to T* automatically. As an aggregate type, it can be initialized with aggregate-initialization given at most N initializers that are convertible to T: <code>std::array</int, 3/> a = {1,2,3};</code>.
+<h4>The array is a collection of homogeneous objects and this array container is defined for constant size. This container is an aggregate type with the same semantics as a struct holding a C-style array T[N] as its only non-static data member. Unlike a C-style array, it doesn't decay to T* automatically. As an aggregate type, it can be initialized with aggregate-initialization given at most N initializers that are convertible to T: <code>std::array\<int, 3\> a = {1,2,3};</code>.
 </h4>
 
 <h5>This C++ STL array is a kind of sequential container and is not used extremely in regular programming or in competitive programming but sometimes its member function provides an upper edge to it over the regular normal array that we use in our daily life. So, we are discussing some of the important member function that is used with such kind of array:</h5>
